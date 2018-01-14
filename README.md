@@ -50,4 +50,4 @@ assert.equal(false, maxLength(value, config));
 assert.equal(false, minLength(value, config));
 ``` 
 
-Se puede ver el archivo (./test.js)[test.js] para más detalles de configuraciones.
+Se puede ver el archivo [./test.js](test.js) para más detalles de configuraciones.
