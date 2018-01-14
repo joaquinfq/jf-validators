@@ -1,0 +1,24 @@
+{
+    "version"         : "1.0.0",
+    "author"          : "Joaquín Fernández",
+    "name"            : "jf-validators",
+    "description"     : "Validators for various types of data and occasions",
+    "bugs"            : {
+        "url" : "https://github.com/joaquinfq/jf-validators"
+    },
+    "keywords"        : [
+        "data",
+        "data types",
+        "validator",
+        "types"
+    ],
+    "license"         : "MIT",
+    "homepage"        : "http://www.joaquinfernandez.net",
+    "repository"      : {
+        "type" : "git",
+        "url"  : "https://github.com/joaquinfq/jf-validators"
+    },
+    "scripts"         : {
+        "test"  : "node test.js"
+    }
+}
