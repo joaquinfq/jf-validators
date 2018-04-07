@@ -1,24 +1,27 @@
 {
-    "version"         : "1.0.0",
-    "author"          : "Joaquín Fernández",
-    "name"            : "jf-validators",
-    "description"     : "Validators for various types of data and occasions",
-    "bugs"            : {
-        "url" : "https://github.com/joaquinfq/jf-validators"
+    "version": "1.0.1",
+    "author": "Joaquín Fernández",
+    "name": "jf-validators",
+    "description": "Validators for various types of data and occasions",
+    "bugs": {
+        "url": "https://github.com/joaquinfq/jf-validators"
     },
-    "keywords"        : [
+    "keywords": [
         "data",
         "data types",
         "validator",
         "types"
     ],
-    "license"         : "MIT",
-    "homepage"        : "http://www.joaquinfernandez.net",
-    "repository"      : {
-        "type" : "git",
-        "url"  : "https://github.com/joaquinfq/jf-validators"
+    "license": "MIT",
+    "homepage": "http://www.joaquinfernandez.net",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/joaquinfq/jf-validators"
     },
-    "scripts"         : {
-        "test"  : "node test.js"
+    "scripts": {
+        "test": "istanbul cover --include-all-sources --print both --report text --root src test.js"
+    },
+    "devDependencies": {
+        "istanbul": "^0.4.5"
     }
 }

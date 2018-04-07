@@ -12,22 +12,15 @@ module.exports = function validate(validators, value, config = {})
     let _isValid = true;
     if (validators)
     {
-        if (typeof validators === 'function')
+        if (!Array.isArray(validators))
         {
-            validators = [validators];
+            validators = [ validators ];
         }
-        if (Array.isArray(validators))
-        {
-            _isValid = validators.every(
-                validator => typeof validator === 'function'
-                    ? validator(value, config)
-                    : false
-            );
-        }
-        else
-        {
-            _isValid = false;
-        }
+        _isValid = validators.every(
+            validator => typeof validator === 'function'
+                ? validator(value, config)
+                : false
+        );
     }
 
     return _isValid;

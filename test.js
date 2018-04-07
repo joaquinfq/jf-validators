@@ -1,11 +1,5 @@
-const assert      = require('assert');
-const validators  = {
-    email     : require('./src/email'),
-    maxLength : require('./src/max-length'),
-    maxValue  : require('./src/max-value'),
-    minLength : require('./src/min-length'),
-    minValue  : require('./src/min-value')
-};
+const assert     = require('assert');
+const validators = require('./index');
 const typeValues = [
     0,
     1,
@@ -22,11 +16,12 @@ let numAssertions = 0;
 
 function testConfig(validator, value)
 {
-    const _size  = typeof value === 'string'
+    const _type = typeof value;
+    const _size = _type === 'string'
         ? value.length
         : value;
     const _increment = validator.substr(0, 3) === 'min' ? 1 : -1;
-    const _validator = validators[validator];
+    const _validator = validators[_type][validator];
     // Valor por defecto.
     testValidate(validator, true, _validator(value));
     // Valor límite
@@ -49,7 +44,7 @@ function testValidate(description, expected, value)
 function testNumberValidators()
 {
     const _value  = new Date().getTime();
-    for (const _validator of ['maxValue', 'minValue'])
+    for (const _validator of [ 'maxValue', 'minValue' ])
     {
         testConfig(_validator, _value);
         testTypes(_validator, 'number');
@@ -74,7 +69,7 @@ function testStringValidators()
 //------------------------------------------------------------------------------
 function testTypes(validator, type)
 {
-    const _validator = validators[validator];
+    const _validator = validators[type][validator];
     for (const _type of typeValues)
     {
         testValidate(validator, typeof _type === type, _validator(_type));
@@ -95,14 +90,31 @@ function testEmail()
         'abcdefghijklmnopqrstuvwxyzabc.com'  : false,
         '123456789'                          : false
     };
-    const _validator = validators.email;
+    const _validator = validators.string.email;
     for (const _email of Object.keys(_emails))
     {
         testValidate('email', _emails[_email], _validator(_email));
     }
     testTypes('email', 'string');
 }
+
+function testUtilValidate()
+{
+    const _buildValidators = length => Array.from({ length }).map((v,i) => value => value > i);
+    const _validate        = require('./src/util/validate');
+
+    testValidate('validate - default: true', true,  _validate());
+    testValidate('validate - []',            true,  _validate([]));
+    testValidate('validate - !function',     false, _validate(5));
+    testValidate('validate - [!function]',   false, _validate([5]));
+    testValidate('validate - [function]',    true,  _validate(Boolean, true));
+    testValidate('validate - [function]',    false, _validate(Boolean, false));
+    testValidate('validate - function[]',    true,  _validate(_buildValidators(10), 20));
+    testValidate('validate - function[]',    false, _validate(_buildValidators(10), 4));
+}
+//------------------------------------------------------------------------------
 testEmail();
 testNumberValidators();
 testStringValidators();
+testUtilValidate();
 console.log('Total aserciones: %d', numAssertions);

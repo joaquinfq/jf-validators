@@ -1,8 +1,17 @@
 module.exports = {
-    email     : require('./src/email'),
-    maxLength : require('./src/max-length'),
-    maxValue  : require('./src/max-value'),
-    minLength : require('./src/min-length'),
-    minValue  : require('./src/min-value'),
-    validate  : require('./src/util/validate'),
+    // Validadores numéricos.
+    number : {
+        maxValue : require('./src/number/max-value'),
+        minValue : require('./src/number/min-value')
+    },
+    // Validadores para textos.
+    string : {
+        email     : require('./src/string/email'),
+        maxLength : require('./src/string/max-length'),
+        minLength : require('./src/string/min-length')
+    },
+    // Utilidades
+    util   : {
+        validate : require('./src/util/validate')
+    }
 };
