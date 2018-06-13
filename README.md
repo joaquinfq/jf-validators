@@ -11,27 +11,29 @@ Validators for various types of data and occasions.
 Validadores para diversos tipos de datos y ocasiones.
 Todos los validadores son funciones que aceptan 2 parámetros:
 
-- `value`: Valor a validar.
-- `config`: Configuración a usar por el validador (opcional). Es un objeto para permitir pasar el mismo objeto a todos los validadores.
+- `value`  : Valor a validar.
+- `config` : Configuración a usar por el validador (opcional). Es un objeto para permitir configurar el validador.
 
 El validador debe retornar `true` en caso de ser válido el valor.
 
 ### Validadores disponibles
 
-- `email`     : Verifica si el texto puede ser considerado como un email.
-- `max-length`: Verifica si el texto tiene una longitud máxima especificada.
-- `max-value` : Verifica si el valor numérico es menor o igual al valor especificado.
-- `min-length`: Verifica si el texto tiene la longitud mínima requerida.
-- `min-value` : Verifica si el valor numérico es mayor o igual al valor especificado.
+- number:
+    - `max-value` : Verifica si el valor numérico es menor o igual al valor especificado.
+    - `min-value` : Verifica si el valor numérico es mayor o igual al valor especificado.
+- string:
+    - `email`     : Verifica si el texto puede ser considerado como un email.
+    - `max-length`: Verifica si el texto tiene una longitud máxima especificada.
+    - `min-length`: Verifica si el texto tiene la longitud mínima requerida.
 
 ### Ejemplo de uso
 
 ```js
 const assert    = require('assert');
-const maxLength = require('jf-validators/src/max-length');
-const minLength = require('jf-validators/src/min-length');
+const maxLength = require('jf-validators/src/string/max-length');
+const minLength = require('jf-validators/src/string/min-length');
 
-const value = 'Lorem ipsum'; // Texto con 11 caracteres.
+const value     = 'Lorem ipsum'; // Texto con 11 caracteres.
 
 // Verifica que la longitud mínima sea 0 (valor por defecto).
 assert.equal(true, minLength(value));
@@ -50,4 +52,4 @@ assert.equal(false, maxLength(value, config));
 assert.equal(false, minLength(value, config));
 ``` 
 
-Se puede ver el archivo [./test.js](test.js) para más detalles de configuraciones.
+Se puede ver el archivo [./test.js](test.js) para más ejemplos de configuraciones.
